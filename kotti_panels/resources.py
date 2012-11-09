@@ -9,26 +9,50 @@ from sqlalchemy import Column
 from sqlalchemy import ForeignKey
 from sqlalchemy import Integer
 from sqlalchemy import Unicode
+from zope.interface import implements
 
 from kotti_panels import _
+from kotti_panels.interfaces import IPanel
 
 
-class ContentType(Content):
-    """This is your content type."""
+class Panel(object):
+    """
+    Base class for all panels.
+    """
 
-    # add your columns
-    id = Column(Integer, ForeignKey('contents.id'), primary_key=True)
-    example_text = Column('example_text', Unicode(256))
+    implements(IPanel)
 
-    # change the type info to your needs
+
+class ContentPanel(Content, Panel):
+    """
+    Panel content type.
+
+    Instances of PanelContent are user editable through Kotti's UI and are
+    persisted in the backend DB.
+    """
+
+    #: primary key column in the DB
+    id = Column(
+        Integer,
+        ForeignKey('contents.id'),
+        primary_key=True)
+    #: an example column
+    example_text = Column(
+        'example_text',
+        Unicode(256))
+
+    #: type_info (see kotti.resources.TypeInfo)
     type_info = Content.type_info.copy(
-        name=u'ContentType',
-        title=_(u'Content Type'),
-        add_view=u'add_content_type',
-        addable_to=[u'Document'],
-        )
+        name=u'Panel',
+        title=_(u'Panel'),
+        add_view=u'add_panel',
+        addable_to=[u'Document'])
 
-    # adjust the __init__ method according to your columns
     def __init__(self, example_text=u'', **kwargs):
-        super(ContentType, self).__init__(**kwargs)
+        """
+        :param example_text: example text
+        :type example_text: unicode
+        """
+
+        Content.__init__(self, **kwargs)
         self.example_text = example_text

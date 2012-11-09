@@ -8,63 +8,74 @@ from kotti.views.edit import AddFormView
 from kotti.views.edit import ContentSchema
 from kotti.views.edit import EditFormView
 from kotti.views.util import template_api
+from pyramid.view import view_config
+from pyramid.view import view_defaults
 
 from kotti_panels import _
-from kotti_panels.resources import ContentType
+from kotti_panels.resources import ContentPanel
 
 
-class ContentTypeSchema(ContentSchema):
+class ContentPanelSchema(ContentSchema):
+    """
+    Schema for UI forms to add / edit kotti_panel.resources.ContentPanel
+    instances
+    """
+
     example_text = colander.SchemaNode(colander.String())
 
 
-class ContentTypeAddForm(AddFormView):
-    schema_factory = ContentTypeSchema
-    add = ContentType
-    item_type = _(u"ContentType")
+@view_config(name=ContentPanel.type_info.add_view, permission='add',
+             renderer='kotti:templates/edit/node.pt')
+class ContentPanelAddForm(AddFormView):
+    """Add form for kotti_panel.resources.ContentPanel instances"""
+
+    schema_factory = ContentPanelSchema
+    add = ContentPanel
+    item_type = _(u"ContentPanel")
 
 
-class ContentTypeEditForm(EditFormView):
-    schema_factory = ContentTypeSchema
+@view_config(context=ContentPanel, name='edit', permission='edit',
+             renderer='kotti:templates/edit/node.pt')
+class ContentPanelEditForm(EditFormView):
+    """Edit form for kotti_panel.resources.ContentPanel instances"""
+
+    schema_factory = ContentPanelSchema
 
 
-def view_content_type(context, request):
-    return {
-        'api': template_api(context, request),  # this bounds context and request variables to the api in the template
-        'example_text': context.example_text,  # this can be called directly in the template as example_text
-    }
+@view_defaults(context=ContentPanel, permission='view')
+class ContentPanelViews(object):
+    """
+    View class for all views registered for the
+    kotti_panel.resources.ContentPanel context (except add and edit views).
+    """
 
+    def __init__(self, context, request):
+        """
+        Constructor
 
-def includeme_edit(config):
+        :param context:
+        :type context: kotti_panels.resources.ContentPanel
+        :param request:
+        :type request: pyramid.request.Request
+        """
 
-    config.add_view(
-        ContentTypeEditForm,
-        context=ContentType,
-        name='edit',
-        permission='edit',
-        renderer='kotti:templates/edit/node.pt',
-        )
+        self.context = context
+        self.request = request
 
-    config.add_view(
-        ContentTypeAddForm,
-        name=ContentType.type_info.add_view,
-        permission='add',
-        renderer='kotti:templates/edit/node.pt',
-        )
+    @view_config(name='view', renderer='templates/view.pt')
+    def view(self):
+        """
+        Default view for panels
 
+        :return:
+        :rtype: dict
+        """
 
-def includeme_view(config):
-
-    config.add_view(
-        view_content_type,
-        context=ContentType,
-        name='view',
-        permission='view',
-        renderer='templates/view.pt',
-        )
-
-    config.add_static_view('static-kotti_panels', 'kotti_panels:static')
+        return {
+            'api': template_api(self.context, self.request),  # this bounds context and request variables to the api in the template
+            'example_text': self.context.example_text,  # this can be called directly in the template as example_text
+        }
 
 
 def includeme(config):
-    includeme_edit(config)
-    includeme_view(config)
+    config.scan(__name__)
