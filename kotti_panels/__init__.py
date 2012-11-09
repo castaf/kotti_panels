@@ -1,3 +1,9 @@
+# -*- coding: utf-8 -*-
+
+"""
+kotti_panels
+"""
+
 from pyramid.i18n import TranslationStringFactory
 
 _ = TranslationStringFactory('kotti_panels')

@@ -1,3 +1,9 @@
+# -*- coding: utf-8 -*-
+
+"""
+.. inheritance-diagram:: kotti_panels.static
+"""
+
 from fanstatic import Group
 from fanstatic import Library
 from fanstatic import Resource

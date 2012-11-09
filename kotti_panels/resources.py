@@ -1,3 +1,9 @@
+# -*- coding: utf-8 -*-
+
+"""
+.. inheritance-diagram:: kotti_panels.resources
+"""
+
 from kotti.resources import Content
 from sqlalchemy import Column
 from sqlalchemy import ForeignKey
