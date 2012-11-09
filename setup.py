@@ -33,7 +33,7 @@ CHANGES = open(os.path.join(here, 'CHANGES.rst')).read()
 setup(
     name=project,
     version=version,
-    description="AddOn for Kotti",
+    description="Reusable units of content for Kotti",
     long_description=README + '\n\n' + CHANGES,
     classifiers=[
         "Programming Language :: Python",
