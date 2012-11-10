@@ -19,7 +19,7 @@ today_fmt = '%Y-%m-%d'
 exclude_patterns = ['_build', '_themes']
 pygments_style = 'sphinx'
 
-# -- Options for HTML output ---------------------------------------------------
+# -- Options for HTML output --------------------------------------------------
 html_theme_path = ['_themes']
 html_theme = 'sphinx-bootstrap'
 html_theme_options = {
@@ -32,7 +32,7 @@ html_static_path = ['_static']
 html_last_updated_fmt = '%Y-%m-%d'
 htmlhelp_basename = 'kottipanelsdoc'
 
-# -- Options for inheritance diagrams ------------------------------------------
+# -- Options for inheritance diagrams -----------------------------------------
 inheritance_graph_attrs = dict(
     rankdir='TB',
     nodesep=0.1,
@@ -44,10 +44,11 @@ inheritance_node_attrs = dict(
     margin='0.06, 0.03'
 )
 
-# -- Options for Intersphinx ---------------------------------------------------
+# -- Options for Intersphinx --------------------------------------------------
 intersphinx_mapping = {
-    'colander': ('http://python.readthedocs.org/en/latest/', None),
+    'colander': ('http://colander.readthedocs.org/en/latest/', None),
     'deform': ('http://deform.readthedocs.org/en/latest/', None),
+    'kotti': ('http://kotti.readthedocs.org/en/latest/', None),
     'pyramid': ('http://pyramid.readthedocs.org/en/latest/', None),
     'sqlalchemy': ('http://sqlalchemy.readthedocs.org/en/latest/', None),
 }

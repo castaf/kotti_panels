@@ -1,37 +1,27 @@
 .. _index:
 
 ==========================
-kotti_panels documentation
+Kotti Panels Documentation
 ==========================
 
+``kotti_panels`` provides support for reusable units of content in Kotti that
+can be defined by either
 
-API
-===
+-   a content manager (via Kotti UI) for "static" content or
 
-.. automodule:: kotti_panels
-   :members:
+-   the developer (by subclassing a base class and using the new
+    package's API) for "dynamic" content units - i.e. such that have
+    some additional logic.  E.g.: tag cloud, navigation, etc.
 
-:mod:`kotti_panels.interfaces`
-------------------------------
+Table of Contents
+-----------------
 
-.. automodule:: kotti_panels.interfaces
-   :members:
+.. toctree::
+    :maxdepth: 1
 
-:mod:`kotti_panels.resources`
------------------------------
+    API <api>
 
-.. automodule:: kotti_panels.resources
-   :members:
+    Roadmap <roadmap>
 
-:mod:`kotti_panels.views`
--------------------------
-
-.. automodule:: kotti_panels.views
-   :members:
-
-:mod:`kotti_panels.static`
------------------------------
-
-.. automodule:: kotti_panels.static
-   :members:
+    View the original proposal <KLIP>
 
