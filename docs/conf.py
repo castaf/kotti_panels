@@ -25,7 +25,7 @@ html_theme = 'sphinx-bootstrap'
 html_theme_options = {
     'github_user': 'disko',
     'github_repo': 'kotti_panels',
-    'twitter_username': 'diskokaiser',
+    'twitter_username': 'KottiCMS',
     'home_url': 'https://github.com/disko/kotti_panels',
 }
 html_static_path = ['_static']
