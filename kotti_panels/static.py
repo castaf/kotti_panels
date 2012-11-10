@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 """
-.. inheritance-diagram:: kotti_panels.static
+
 """
 
 from fanstatic import Group

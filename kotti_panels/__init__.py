@@ -6,7 +6,6 @@ kotti_panels
 
 from pyramid.i18n import TranslationStringFactory
 
-from kotti_panels.registry import PanelRegistry
 
 _ = TranslationStringFactory('kotti_panels')
 
