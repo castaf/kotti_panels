@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xml:lang="en"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      metal:use-macro="api.macro('kotti:templates/view/master.pt')">
+  <body>
+    <div metal:fill-slot="content" class="content">
+      <div tal:replace="api.render_template(
+                        'kotti_panels:templates/static-panel-inline.pt')" />
+    </div>
+  </body>
+</html>

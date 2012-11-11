@@ -27,8 +27,6 @@ class StaticPanelSchema(DocumentSchema):
     instances
     """
 
-    example_text = colander.SchemaNode(colander.String())
-
 
 @view_config(name=StaticPanel.type_info.add_view, permission='add',
              renderer='kotti:templates/edit/node.pt')
@@ -68,10 +66,24 @@ class StaticPanelViews(object):
         self.context = context
         self.request = request
 
-    @view_config(name='view', renderer='templates/view.pt')
+    @view_config(name='view', renderer='templates/static-panel-view.pt')
     def view(self):
         """
         Default view for panels
+
+        :return:
+        :rtype: dict
+        """
+
+        return {
+            'api': template_api(self.context, self.request),  # this bounds context and request variables to the api in the template
+            'example_text': self.context.example_text,  # this can be called directly in the template as example_text
+        }
+
+    @view_config(name='inline', renderer='templates/static-panel-inline.pt')
+    def inline(self):
+        """
+        Inline view for StaticPanel
 
         :return:
         :rtype: dict

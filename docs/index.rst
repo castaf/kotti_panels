@@ -34,6 +34,14 @@ Slot
     rendering.  Slots can either be defined on your ``main_template`` or in an
     arbitrary view template.
 
+    Global Slot
+        A slot defined in the master template.  Panels assigned to one of these
+        slots are displayed in every view that uses the master template.
+
+    Local Slot
+        A slot defined in a view template.  Panels assigned to one of these
+        slots are only displayed when the respective view is displayed.
+
 Panel to slot assignment
     Panels can be locally assigned to slots for every node in your resource
     tree.  Assignments can optionally be inherted to the node's children.
