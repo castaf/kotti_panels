@@ -33,8 +33,6 @@ API
 :mod:`kotti_panels.static`
 --------------------------
 
-.. inheritance-diagram:: kotti_panels.static
-
 .. automodule:: kotti_panels.static
    :members:
 
