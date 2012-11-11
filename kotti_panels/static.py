@@ -1,10 +1,9 @@
 # -*- coding: utf-8 -*-
 
 """
-
+Fanstatic resources for kotti_panels.
 """
 
-from fanstatic import Group
 from fanstatic import Library
 from fanstatic import Resource
 
@@ -13,6 +12,3 @@ library = Library("kotti_panels", "static")
 
 #: see fanstatic.Resource
 kotti_panels_css = Resource(library, "style.css")
-
-#: see fanstatic.Group
-kotti_panels_group = Group([kotti_panels_css])
