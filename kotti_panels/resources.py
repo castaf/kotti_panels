@@ -5,7 +5,7 @@
 """
 
 from kotti import Base
-from kotti.resources import Document
+from kotti.resources import Content
 from kotti.sqla import JsonType
 from kotti.sqla import MutationDict
 from sqlalchemy import Boolean
@@ -13,6 +13,7 @@ from sqlalchemy import Column
 from sqlalchemy import ForeignKey
 from sqlalchemy import Integer
 from sqlalchemy import String
+from sqlalchemy import UnicodeText
 from sqlalchemy import UniqueConstraint
 from zope.interface import implements
 
@@ -20,34 +21,53 @@ from kotti_panels import _
 from kotti_panels.interfaces import IPanel
 
 
-class Panel(object):
+class Panel(Content):
     """
-    Base class for all panels.
+    Base class for all panels.  Inherit from this class when implementing
+    custom panels in an add-on product.
     """
+
+    id = Column(
+        Integer,
+        ForeignKey('contents.id'),
+        primary_key=True)
 
     implements(IPanel)
 
 
-class StaticPanel(Document, Panel):
+class StaticPanel(Panel):
     """
     Panel content type.
 
     Instances of StaticPanel are user editable through Kotti's UI and are
-    persisted in the backend DB.
+    persisted in the backend DB.  Although panels have the same attributes
+    as kotti.resources.Document they are not subclassed from that class to
+    prevent them showing up as discrete items in the search results.
     """
 
     #: primary key column in the DB
     id = Column(
         Integer,
-        ForeignKey('documents.id'),
+        ForeignKey('panels.id'),
         primary_key=True)
+    #: content of the panel (Unicode)
+    body = Column(UnicodeText())
+    #: MIME type of the Document (String)
+    mime_type = Column(String(30))
 
     #: type_info (see kotti.resources.TypeInfo)
-    type_info = Document.type_info.copy(
+    type_info = Content.type_info.copy(
         name=u'Panel',
         title=_(u'Panel'),
         add_view=u'add_panel',
         addable_to=[u'Document'])
+
+    def __init__(self, body=u"", mime_type='text/html', **kwargs):
+
+        super(StaticPanel, self).__init__(**kwargs)
+
+        self.body = body
+        self.mime_type = mime_type
 
 
 class PanelAssignment(Base):
