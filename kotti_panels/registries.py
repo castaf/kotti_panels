@@ -12,8 +12,22 @@ class PanelTypeRegistry(object):
     assignment.
     """
 
-    def available_types(self):
+    def available_types(self, context=None):
         """
+        Return a list of classes that implement the
+        kotti_panels.interfaces.IPanel interface.
+
+        :param context:
+
+            If None
+                return all panel types.
+
+            If not None
+                return only those panel types that can be assigned to the given
+                context node item.
+
+        :type context: kotti.resources.Content or descendants
+
         :result: List of available panel types.
         :rtype: list
         """
@@ -30,20 +44,24 @@ class PanelRegistry(object):
 
         :param context:
 
-            If None: return all panels that are assigned anywhere
-            in the resource tree.
+            If None
+                return all panels that are assigned anywhere in the resource
+                tree.
 
-            If not None: return only those panels that
-            are asigned to the given context node item.
+            If not None
+                return only those panels that are asigned to the given context
+                node item.
 
         :type context: kotti.resources.node (or descendant)
 
         :param slot:
 
-            If None: return all panels that are assigned to any slot.
+            If None
+                return all panels that are assigned to any slot.
 
-            If not None: return only those panels that are assigned to the slot
-            with this name.
+            If not None
+                return only those panels that are assigned to the slot with this
+                name.
 
         :type slot: str
 
