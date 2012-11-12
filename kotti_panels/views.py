@@ -99,9 +99,7 @@ class StaticPanelViews(object):
 
 @view_defaults(context=Content)
 class GlobalSlotViews(object):
-    """
-    GlobalSlotViews provides a view for each of the global slots
-    """
+    """GlobalSlotViews provides a view for each of the global slots."""
 
     def __init__(self, context, request):
 
@@ -110,28 +108,23 @@ class GlobalSlotViews(object):
 
     @view_config(name='left')
     def left(self):
-        """ """
-        pass
+        """Render all panels that are assigned to the ``left`` slot."""
 
     @view_config(name='right')
     def right(self):
-        """ """
-        pass
+        """Render all panels that are assigned to the ``right`` slot."""
 
     @view_config(name='abovecontent')
     def abovecontent(self):
-        """ """
-        pass
+        """Render all panels that are assigned to the ``abovecontent`` slot."""
 
     @view_config(name='belowcontent')
     def belowcontent(self):
-        """ """
-        pass
+        """Render all panels that are assigned to the ``belowcontent`` slot."""
 
     @view_config(name='beforebodyend')
     def beforebodyend(self):
-        """ """
-        pass
+        """Render all panels that are assigned to the ``beforebodyend`` slot."""
 
 
 def includeme(config):
