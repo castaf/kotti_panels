@@ -3,7 +3,8 @@
 """
 Interfaces.
 
-.. inheritance-diagram:: kotti_panels.interfaces"""
+.. inheritance-diagram:: kotti_panels.interfaces
+"""
 
 from zope.interface import Interface
 

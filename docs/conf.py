@@ -5,6 +5,7 @@ extensions = [
     'sphinx.ext.autodoc',
     'sphinx.ext.graphviz',
     'sphinx.ext.inheritance_diagram',
+    'sphinx.ext.intersphinx',
     'sphinx.ext.viewcode',
 ]
 

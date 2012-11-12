@@ -10,9 +10,11 @@ Every panel needs at least 2 views:
 """
 
 import colander
+from kotti.resources import Content
 from kotti.views.edit import AddFormView
 from kotti.views.edit import DocumentSchema
 from kotti.views.edit import EditFormView
+from kotti.views.slots import assign_slot
 from kotti.views.util import template_api
 from pyramid.view import view_config
 from pyramid.view import view_defaults
@@ -31,7 +33,7 @@ class StaticPanelSchema(DocumentSchema):
 @view_config(name=StaticPanel.type_info.add_view, permission='add',
              renderer='kotti:templates/edit/node.pt')
 class StaticPanelAddForm(AddFormView):
-    """Add form for kotti_panel.resources.StaticPanel instances"""
+    """Add form for :class:`kotti_panel.resources.StaticPanel` instances"""
 
     schema_factory = StaticPanelSchema
     add = StaticPanel
@@ -41,7 +43,7 @@ class StaticPanelAddForm(AddFormView):
 @view_config(context=StaticPanel, name='edit', permission='edit',
              renderer='kotti:templates/edit/node.pt')
 class StaticPanelEditForm(EditFormView):
-    """Edit form for kotti_panel.resources.StaticPanel instances"""
+    """Edit form for :class:`kotti_panel.resources.StaticPanel` instances"""
 
     schema_factory = StaticPanelSchema
 
@@ -95,5 +97,49 @@ class StaticPanelViews(object):
         }
 
 
+@view_defaults(context=Content)
+class GlobalSlotViews(object):
+    """
+    GlobalSlotViews provides a view for each of the global slots
+    """
+
+    def __init__(self, context, request):
+
+        self.context = context
+        self.request = request
+
+    @view_config(name='left')
+    def left(self):
+        """ """
+        pass
+
+    @view_config(name='right')
+    def right(self):
+        """ """
+        pass
+
+    @view_config(name='abovecontent')
+    def abovecontent(self):
+        """ """
+        pass
+
+    @view_config(name='belowcontent')
+    def belowcontent(self):
+        """ """
+        pass
+
+    @view_config(name='beforebodyend')
+    def beforebodyend(self):
+        """ """
+        pass
+
+
 def includeme(config):
+
     config.scan(__name__)
+
+    # Assign each view to the slot with the same name
+    for name in ('left', 'right', 'abovecontent', 'belowcontent',
+                 'beforebodyend', ):
+
+        assign_slot(name, name, params=None)

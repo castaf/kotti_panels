@@ -10,6 +10,14 @@ _ = TranslationStringFactory('kotti_panels')
 
 
 def kotti_configure(settings):
+    """
+    This function is called on startup if you a line like this in your ini
+    file::
+
+        kotti.configurators = kotti_panels.kotti_configure
+
+    It sets up the ``kotti_panels`` addon
+    """
 
     settings['kotti.available_types'] += ' kotti_panels.resources.StaticPanel'
     settings['kotti.includes'] += ' kotti_panels.views'

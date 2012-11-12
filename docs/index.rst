@@ -38,6 +38,8 @@ Slot
         A slot defined in the master template.  Panels assigned to one of these
         slots are displayed in every view that uses the master template.
 
+        See :ref:`global slots` for detailed information.
+
     Local Slot
         A slot defined in a view template.  Panels assigned to one of these
         slots are only displayed when the respective view is displayed.

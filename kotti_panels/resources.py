@@ -41,8 +41,8 @@ class StaticPanel(Panel):
 
     Instances of StaticPanel are user editable through Kotti's UI and are
     persisted in the backend DB.  Although panels have the same attributes
-    as kotti.resources.Document they are not subclassed from that class to
-    prevent them showing up as discrete items in the search results.
+    as :class:`kotti.resources.Document` they are not subclassed from that class
+    to prevent them showing up as discrete items in the search results.
     """
 
     #: primary key column in the DB
@@ -55,7 +55,7 @@ class StaticPanel(Panel):
     #: MIME type of the Document (String)
     mime_type = Column(String(30))
 
-    #: type_info (see kotti.resources.TypeInfo)
+    #: type_info (see class:`kotti.resources.TypeInfo`)
     type_info = Content.type_info.copy(
         name=u'Panel',
         title=_(u'Panel'),
